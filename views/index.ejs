@@ -1,0 +1,45 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container">
+  <div class="heading">
+    <h1>Tareas para Hoy</h1>
+    <% if (locals.fechaHoy) { %>
+    <div class="fecha"><%= fechaHoy %></div>
+    <% }; %>
+    <hr />
+  </div>
+  <div class="input">
+    <form action="/" method="POST">
+      <input type="text" class="inputTarea" id="inp" name="tarea" />
+      <input type="submit" class="todobtn" id="todobutton" value="" />
+    </form>
+  </div>
+  <% if (locals.tareasPendientes) { %>
+
+  <div class="list">
+    <ul>
+      <% for(let tarea of tareasPendientes){%>
+
+      <li id="listelement" class=""><%= tarea %></li>
+
+      <% } %>
+
+      <script>
+        var elementosLista = document.querySelectorAll("li");
+
+        for (let i = 0; i < elementosLista.length; i++) {
+          document
+            .querySelectorAll("li")
+            [i].addEventListener("click", function () {
+              this.classList.toggle("tachar");
+            });
+        }
+      </script>
+    </ul>
+  </div>
+  <form action="/trabajo" method="GET" class="pageForm">
+    <input type="submit" name="trabajo" value="Ir a Trabajo" class="btnPage" />
+  </form>
+</div>
+
+<% }; %> <%- include("partials/footer.ejs") %>

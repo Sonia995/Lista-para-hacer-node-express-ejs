@@ -1,0 +1,44 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container">
+  <div class="heading">
+    <h1>Trabajo</h1>
+    <% if (locals.fechaHoy) { %>
+    <div class="fecha"><%= fechaHoy %></div>
+    <% }; %>
+    <hr />
+  </div>
+  <div class="input">
+    <form action="/trabajo" method="POST">
+      <input type="text" class="inputTarea" id="inp" name="tarea" />
+      <input type="submit" class="todobtn" id="todobutton" value="" />
+    </form>
+  </div>
+  <% if (locals.tareasTrabajo) { %>
+
+  <div class="list">
+    <ul>
+      <% for(let trabajo of tareasTrabajo){%>
+
+      <li id="listelement" class=""><%= trabajo %></li>
+
+      <% } %>
+
+      <script>
+        var elementosLista = document.querySelectorAll("li");
+
+        for (let i = 0; i < elementosLista.length; i++) {
+          document.querySelectorAll("li")[i].addEventListener("click", function () {
+            this.classList.toggle("tachar");
+          });
+        }
+      </script>
+     </ul>
+   </div>
+<% }; %> 
+<form action="/" method="GET" class="pageForm">
+  <input type="submit" name="diario" value="Volver a Diario" class="btnPage">
+</form>
+</div>
+
+<%- include("partials/footer.ejs") %>
